@@ -1,0 +1,19 @@
+{
+    "name": "tsyvkunov/yandex-cloud-translate",
+    "description": "Laravel package for Yandex Cloud Translate",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Tsyvkunov\\YandexCloudTranslate\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Ilya",
+            "email": "me@tsyvkunov.ru"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.5"
+    }
+}
