@@ -61,7 +61,7 @@ class Client
             ]
         );
 
-        return data_get($data, 'iamToken');
+        return $data->iamToken;
     }
 
     /**

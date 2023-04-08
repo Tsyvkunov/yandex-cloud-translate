@@ -34,16 +34,21 @@ class Translate
      * @throws GuzzleException
      * @throws JsonException
      */
-    public function translate($texts, $sourceLanguage, $targetLanguage = 'ru')
+    public function translate($texts, $targetLanguage = 'ru', $sourceLanguage = null)
     {
+        $data = [
+            'targetLanguageCode' => $targetLanguage,
+            'texts' => $texts
+        ];
+
+        if(!empty($sourceLanguage)) {
+            $data['sourceLanguageCode'] = $sourceLanguage;
+        }
+
         return $this->client->request(
             Client::URLS['translate'],
             'translate',
-            [
-                'sourceLanguageCode' => $sourceLanguage,
-                'targetLanguageCode' => $targetLanguage,
-                'texts' => $texts
-            ]
+            $data
         );
     }
 
