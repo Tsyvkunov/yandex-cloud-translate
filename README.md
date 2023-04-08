@@ -61,6 +61,17 @@ $translate->makeApi('apiKey');
 use Tsyvkunov\YandexCloudTranslate\Translate;
 
 /*
+ * Получение текущего формата для перевода
+ */
+echo $translate->getFormat();
+
+/*
+ * Выбор формата для перевода, по умолчанию PLAIN_TEXT
+ */
+$translate->setHtmlFormat();
+$translate->setPlaintTextFormat();
+
+/*
  * Строка/массив строк для перевода
  * Язык, на который переводится текст
  * Язык, с которого переводится текст (необязательный параметр)
