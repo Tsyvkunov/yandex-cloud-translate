@@ -51,7 +51,7 @@ $translate = new Translate('iamToken');
 ```php
 use Tsyvkunov\YandexCloudTranslate\Translate;
 
-$translate = new Translate('iamToken');
+$translate = new Translate();
 $translate->makeApi('apiKey');
 ```
 
