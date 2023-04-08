@@ -9,6 +9,8 @@ class Translate
 {
     protected Client $client;
 
+    public string $format = 'PLAIN_TEXT';
+
     public function __construct($token = null, $folderId = null)
     {
         $this->client = new Client();
@@ -30,6 +32,23 @@ class Translate
         return $this;
     }
 
+    public function setHtmlFormat(): static
+    {
+        $this->format = 'HTML';
+        return $this;
+    }
+
+    public function setPlaintTextFormat(): static
+    {
+        $this->format = 'PLAIN_TEXT';
+        return $this;
+    }
+
+    public function getFormat(): string
+    {
+        return $this->format;
+    }
+
     /**
      * @throws GuzzleException
      * @throws JsonException
@@ -38,7 +57,8 @@ class Translate
     {
         $data = [
             'targetLanguageCode' => $targetLanguage,
-            'texts' => $texts
+            'texts' => $texts,
+            'format' => $this->format
         ];
 
         if(!empty($sourceLanguage)) {
