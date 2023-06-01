@@ -2,8 +2,10 @@
 
 namespace Tsyvkunov\YandexCloudTranslate;
 
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use JsonException;
+use RuntimeException;
 
 class Translate
 {
@@ -53,11 +55,11 @@ class Translate
      * @throws GuzzleException
      * @throws JsonException
      */
-    public function translate($texts, $targetLanguage = 'ru', $sourceLanguage = null)
+    public function translate($text, $targetLanguage = 'ru', $sourceLanguage = null)
     {
         $data = [
             'targetLanguageCode' => $targetLanguage,
-            'texts' => $texts,
+            'texts' => [$text],
             'format' => $this->format
         ];
 
@@ -65,11 +67,18 @@ class Translate
             $data['sourceLanguageCode'] = $sourceLanguage;
         }
 
-        return $this->client->request(
-            Client::URLS['translate'],
-            'translate',
-            $data
-        );
+        try {
+            $response = $this->client->request(
+                Client::URLS['translate'],
+                'translate',
+                $data
+            );
+        }catch (Exception $exception) {
+            \Log::info('YandexException', [$exception->getMessage(), $exception]);
+            throw new RuntimeException($exception);
+        }
+
+        return $response;
     }
 
 
