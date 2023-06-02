@@ -28,9 +28,12 @@ class Translate
         }
     }
 
-    public function makeApi($apiKey): static
+    public function makeApi($apiKey, $folderId = null): static
     {
         $this->client->addAuthHeader('Api-Key', $apiKey);
+        if(!empty($folderId)) {
+            $this->client->setFolderId($folderId);
+        }
         return $this;
     }
 
